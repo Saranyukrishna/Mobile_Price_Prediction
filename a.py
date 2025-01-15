@@ -2,16 +2,11 @@ import streamlit as st
 import joblib
 import numpy as np
 import pandas as pd
-
-# Load the trained model
 model = joblib.load('stacking_regressor_model.pkl')
-
-# Define the column names that the model expects (matching with your provided code)
 expected_columns = ['RAM', 'ROM', 'Back Camera', 'Front_Camera', 'Battery', 'Processor_Brand', 'Phone Name']
 
 st.title('Mobile Price Prediction')
 
-# Custom CSS for the Streamlit app styling
 st.markdown("""
     <style>
         body {
@@ -32,8 +27,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.subheader('Please enter the details of the mobile to predict the price:')
-
-# Input fields for the features (matching column order)
 phone_name = st.text_input('Phone Name')  # Input field for Phone Name
 ram = st.number_input('RAM (in GB)', min_value=1)
 rom = st.number_input('ROM (in GB)', min_value=8)
@@ -41,8 +34,6 @@ back_camera = st.number_input('Back Camera (in MP)', min_value=1)
 front_camera = st.number_input('Front Camera (in MP)', min_value=1)
 battery = st.number_input('Battery (in mAh)', min_value=1000)
 processor_brand = st.text_input('Processor Brand (Qualcomm, MediaTek, Exynos, Unisoc, Generic (Unbranded), Google Tensor, Kirin)')
-
-# Prepare the input data according to the model's expected format
 input_data = pd.DataFrame({
     'Phone Name': [phone_name],  # Include 'Phone Name' as part of the input
     'RAM': [ram],
@@ -52,8 +43,6 @@ input_data = pd.DataFrame({
     'Battery': [battery],
     'Processor_Brand': [processor_brand]  # Only Processor Brand here
 })
-
-# Ensure that 'Phone Name' is processed correctly in the column transformer
 if st.button('Predict Price'):
     prediction = model.predict(input_data)  # The model expects the processor brand and phone name as categorical features
     st.subheader(f'Phone Name: {phone_name}')  # Display the Phone Name
