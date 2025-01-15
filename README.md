@@ -2,6 +2,7 @@ MOBILE PRICE PREDICTION
 
 This project uses machine learning to predict the price of flagship mobile phones based on various specifications.
 The model takes inputs like RAM, ROM, Back Camera, Front Camera, Battery, and Processor Brand, and returns a predicted price for the phone.
+The data that I acquired is from flipkart ,I scraped the data of various mobile phones using selenium.
 
 Project Description
 The app predicts the price of flagship mobile phones based on the following specifications:
